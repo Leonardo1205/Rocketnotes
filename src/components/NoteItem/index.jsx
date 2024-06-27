@@ -18,8 +18,6 @@ export function NoteItem({ isNew, value, onClick, ...rest}) {
             >
                 { isNew ? <FiPlus/> : <FiX/> }
             </button>
-            
-            
         </Container>
     )
 }

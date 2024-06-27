@@ -11,8 +11,7 @@ import { Container, Form } from "./styles"
 export function New() {
     return(
         <Container>
-            <Header />
-
+            <Header/>
             <main>
                 <Form>
                     <header>
@@ -24,18 +23,16 @@ export function New() {
                     <Textarea placeholder="Observações"/>
 
                     <Section title= "Links úteis">
-                        <NoteItem value="https://youtube.com.br" />
-                        <NoteItem isNew placeholder= 'Novo Link'/>
+                        <NoteItem value="https://youtube.com.br"/>
+                        <NoteItem isNew placeholder="Novo Link"/>
                     </Section>
 
                     <Section title= "Marcadores">
-                        <div className="tags">
-                            <NoteItem value="react" />
-                            <NoteItem isNew placeholder= 'Nova tag'/>
-                        </div>
-
-                        <Button title="Salvar"/>
+                            <NoteItem value="react"/>
+                            <NoteItem isNew placeholder="Nova tag"/>  
                     </Section>
+
+                    <Button title="Salvar"/>
                 </Form>
             </main>
         </Container>
