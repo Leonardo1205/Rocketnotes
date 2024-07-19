@@ -40,21 +40,21 @@ export function SignUp() {
                 <h2>Crie sua conta</h2>
 
                 <Input
-                    placeHolder = "Nome"
+                    placeholder = "Nome"
                     type= "text"
                     icon={FiUser}
                     onChange={e => setName(e.target.value)}
                 />
 
                 <Input
-                    placeHolder = "E-mail"
+                    placeholder = "E-mail"
                     type= "text"
                     icon={FiMail}
                     onChange={e => setEmail(e.target.value)}
                 />
 
                 <Input
-                    placeHolder = "Senha"
+                    placeholder = "Senha"
                     type= "password"
                     icon={FiLock}
                     onChange={e => setPassword(e.target.value)}

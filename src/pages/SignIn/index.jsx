@@ -1,14 +1,13 @@
-import { useContext } from 'react';
 import { FiMail, FiLock } from 'react-icons/fi'
 import { Link } from "react-router-dom"
-import { MyContext } from '../../myContext';
+import { useAuth } from '../../hooks/auth';
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button/Index";
 import { Container, Form, Background } from "./styles";
 
 export function SignIn() {
 
-    const data = useContext(MyContext);
+    const data = useAuth();
     console.log("MEU CONTEXTO =>", data);
 
     return(
@@ -20,13 +19,13 @@ export function SignIn() {
                 <h2>Faça seu login</h2>
 
                 <Input
-                    placeHolder = "E-mail"
+                    placeholder = "E-mail"
                     type= "text"
                     icon={FiMail}
                 />
 
                 <Input
-                    placeHolder = "Senha"
+                    placeholder = "Senha"
                     type= "password"
                     icon={FiLock}
                 />
