@@ -64,8 +64,7 @@ function AuthProvider({ children }) {
     useEffect(() => {
         const token = localStorage.getItem("@rocketnotes:token");
         const user = localStorage.getItem("@rocketnotes:user");
-        localStorage.removeItem("@rocketnotes:user");
-        localStorage.removeItem("@rocketnotes:token");
+        
 
 
         if( token && user) {
