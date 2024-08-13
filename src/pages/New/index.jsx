@@ -108,9 +108,9 @@ export function New() {
                             {
                                 tags.map((tag, index) =>(
                                 <NoteItem
-                                key={String(index)}
-                                value={tag}
-                                onClick={() => { handleRemoveTag(tag) }}
+                                    key={String(index)}
+                                    value={tag}
+                                    onClick={() => {         handleRemoveTag(tag) }}
                                 />
                                 ))
                             }

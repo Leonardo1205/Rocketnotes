@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 import { api } from "../services/api";
-import { json } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
@@ -65,6 +64,9 @@ function AuthProvider({ children }) {
     useEffect(() => {
         const token = localStorage.getItem("@rocketnotes:token");
         const user = localStorage.getItem("@rocketnotes:user");
+        localStorage.removeItem("@rocketnotes:user");
+        localStorage.removeItem("@rocketnotes:token");
+
 
         if( token && user) {
             api.defaults.headers.common['authorization'] = `Bearer ${token}`;
