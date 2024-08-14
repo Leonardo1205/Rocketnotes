@@ -5,8 +5,22 @@ import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Section } from "../../components/Section";
 import { ButtonText } from "../../components/ButtonText";
+import { useState, useEffect } from "react";
+import { api } from "../../services/api";
 
 export function Home() {
+    const [tags, setTags] = useState([]);
+
+    useEffect(() => {
+        async function feachTags() {
+            const response = await api.get("/tags");
+
+            setTags(response.data);
+        }
+
+        feachTags();
+    }, [])
+
     return(
         <Container>
             
@@ -18,8 +32,11 @@ export function Home() {
 
             <Menu>
                 <li><ButtonText title= "Todos" isActive /></li>
-                <li><ButtonText title= "React" /></li>
-                <li><ButtonText title= "Node" /></li>
+                {
+                    tags && tags.map(tag =>(
+                        <li key={String(tag.id)}><ButtonText title= {tag.name} /></li>
+                    ))
+                }
             </Menu>
 
             <Search>
