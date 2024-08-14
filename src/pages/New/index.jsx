@@ -40,6 +40,28 @@ export function New() {
         setTags(prevState => prevState.filter(tag => tag !== deleted));
     }
 
+    async function handleNewNote() {
+        if(!title) {
+            return alert("Digite o título da nota");
+        }
+
+        if(newLink) {
+            return alert("Você deixou um link no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio");
+        }
+
+        if(newTag) {
+            return alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio");
+        }
+        await api.post("/notes", {
+            title,
+            description,
+            tags,
+            links
+        })
+
+        alert("Note criada com sucesso!");
+        navigate("/");
+    }
 
     return(
         <Container>
@@ -86,7 +108,7 @@ export function New() {
                                 <NoteItem
                                     key={String(index)}
                                     value={tag}
-                                    onClick={() => {         handleRemoveTag(tag) }}
+                                    onClick={() => { handleRemoveTag(tag) }}
                                 />
                                 ))
                             }
