@@ -10,6 +10,18 @@ import { api } from "../../services/api";
 
 export function Home() {
     const [tags, setTags] = useState([]);
+    const [tagSelected, setTagSelected] = useState([]);
+
+    function handleTagSelected(tagName) {
+        const alreadySelected = tagSelected.includes(tagName);
+
+        if (alreadySelected) {
+            const filteredTags = tagSelected.filter(tag => tag !== tagName);
+            setTagSelected(filteredTags);
+        } else {
+            setTagSelected(prevState => [...prevState, tagName]);
+        }
+     }
 
     useEffect(() => {
         async function feachTags() {
@@ -31,10 +43,22 @@ export function Home() {
             <Header/>
 
             <Menu>
-                <li><ButtonText title= "Todos" isActive /></li>
+                <li>
+                    <ButtonText 
+                        title= "Todos" 
+                        onClick={() => handleTagSelected("all")}
+                        isActive={tagSelected.length === 0}
+                    />
+                </li>
                 {
                     tags && tags.map(tag =>(
-                        <li key={String(tag.id)}><ButtonText title= {tag.name} /></li>
+                        <li key={String(tag.id)}>
+                            <ButtonText 
+                                title= {tag.name} 
+                                onClick={() => handleTagSelected(tag.name)}
+                                isActive={tagSelected.includes(tag.name)}
+                            />
+                        </li>
                     ))
                 }
             </Menu>
