@@ -9,8 +9,10 @@ import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 
 export function Home() {
+    const [search, setSearch] = useState("");
     const [tags, setTags] = useState([]);
     const [tagSelected, setTagSelected] = useState([]);
+    const [notes, setNotes] = useState([]);
 
     function handleTagSelected(tagName) {
         const alreadySelected = tagSelected.includes(tagName);
@@ -32,6 +34,15 @@ export function Home() {
 
         feachTags();
     }, [])
+
+    useEffect(() => {
+        async function fetchNotes() {
+            const response = await api.get(`/notes?title=${search}&tags=${tagSelected}`);
+            setNotes(response.data);
+        }
+
+        fetchNotes();
+    }, [tagSelected, search]);
 
     return(
         <Container>
@@ -64,18 +75,22 @@ export function Home() {
             </Menu>
 
             <Search>
-                <Input placeholder= "Pesquisar pelo título" icon={FiSearch}/>
+                <Input 
+                    placeholder= "Pesquisar pelo título" 
+                    onChange={() => setSearch(e.target.value)}
+                />
             </Search>
 
             <Content>
                 <Section title= "Minhas notas">
-                    <Note data={{
-                        title: 'React',
-                        tags: [
-                            {id: "1", name: 'react'},
-                            {id: "2", name: 'rocketnotes'}
-                        ]
-                    }}/>
+                    {
+                        notes.map(note =>(
+                        <Note 
+                            key={String(note.id)}
+                            data={note}
+                        />
+                        ))
+                    }
 
                 </Section>
             </Content>
